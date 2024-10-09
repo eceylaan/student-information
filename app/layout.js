@@ -21,9 +21,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="min-h-screen grid grid-rows-12">
-          <Navbar />
-          <main className="row-span-11">{children}</main>
+        <div className="min-h-screen bg-slate-300">
+          <main>{children}</main>
         </div>
       </body>
     </html>
