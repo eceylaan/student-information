@@ -18,6 +18,7 @@ export async function login(formData) {
     email: formData.get("email"),
     password: formData.get("password"),
   };
+
   console.log(data);
 
   const { error, data: userData } = await supabase.auth.signInWithPassword(data);
@@ -26,8 +27,12 @@ export async function login(formData) {
     console.log(error);
     redirect("/error");
   }
+  if (userData.user.user_metadata.role === "admin") {
+    redirect("/dashboard");
+  } else if (userData.user.user_metadata.role === "user") {
+    redirect("/account");
+  }
   revalidatePath("/", "layout");
-  redirect("/account");
 }
 export async function signUp(prevState, formData) {
   const supabase = createClient();
@@ -60,6 +65,9 @@ export async function signUp(prevState, formData) {
     return {
       errors,
     };
+  }
+  if (email === "ceylann.ece@gmail.com") {
+    defaultUserMetadata.role = "admin";
   }
   const { error } = await supabase.auth.signUp({
     email,

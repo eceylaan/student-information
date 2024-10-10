@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Signout() {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true);
   const supabase = createClient();
 
   useEffect(() => {
