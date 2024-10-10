@@ -28,7 +28,7 @@ export async function login(formData) {
     redirect("/error");
   }
   if (userData.user.user_metadata.role === "admin") {
-    redirect("/dashboard");
+    redirect("/adminpage");
   } else if (userData.user.user_metadata.role === "user") {
     redirect("/account");
   }

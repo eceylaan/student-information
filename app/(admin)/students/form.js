@@ -41,7 +41,7 @@ export default function Form({ students }) {
               <td className="border px-4 py-2">{student.name}</td>
               <td className="border px-4 py-2">
                 <button onClick={() => handleOpenDialog(student)} className="bg-blue-500 text-white px-4 py-2 rounded">
-                  Update Vize
+                  Update Notes
                 </button>
               </td>
             </tr>
