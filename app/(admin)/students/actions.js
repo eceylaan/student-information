@@ -18,5 +18,6 @@ export async function updateStudentVize(formData) {
     console.log(error);
     return;
   }
+
   revalidatePath("/", "layout");
 }

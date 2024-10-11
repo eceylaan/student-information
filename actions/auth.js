@@ -69,7 +69,7 @@ export async function signUp(prevState, formData) {
   if (email === "ceylann.ece@gmail.com") {
     defaultUserMetadata.role = "admin";
   }
-  const { error } = await supabase.auth.signUp({
+  const { error, data } = await supabase.auth.signUp({
     email,
     password,
     phone,
@@ -86,7 +86,14 @@ export async function signUp(prevState, formData) {
     console.log(error);
     redirect("/error");
   }
-
+  const response = await supabase.from("students_informations").insert({
+    final: 0,
+    vize: 0,
+    vize2: 0,
+    email: data.user.email,
+    name: data.user.user_metadata.firstName,
+    last_name: data.user.user_metadata.lastName,
+  });
   revalidatePath("/", "layout");
   redirect("/");
 }
@@ -102,3 +109,8 @@ export async function signOut() {
   revalidatePath("/", "layout");
   redirect("/");
 }
+// export async function deleteUser(id) {
+//   const supabase = createClient();
+//   await supabase.from("students_informations").select("id", id).delete();
+//   await supabase.auth.admin.listUsers()
+// }
